@@ -12,49 +12,75 @@ function getComputerChoice() {
     return "Scissors";
 }
 
+function looksLike(string) {
+    for (char in string) {
+        if (char === 'p') {
+            return "Paper";
+        }
+        if (char === 's') {
+            return "Scissors";
+        }
+    }
+    return "Rock";
+}
 
-function playRound(p, c) {
-    if (p !== "Rock" && p !== "Paper" && p !== "Scissors") {
-        return "Invalid";
-    }
-    if (c !== "Rock" && c !== "Paper" && c !== "Scissors") {
-        return "Invalid";
-    }
+function playRound(e) {
+    let c = getComputerChoice();
+    let p = String(e.target.className);
+    p = looksLike(p);
+    console.log(`Player = ${p}: Computer = ${c}`);
+    let result = document.querySelector('.Result');
     if (p === "Rock") {
         if (c === "Rock") {
-            return "Tie";
+            result.textContent = "Tie";
+            return;
         }
         if (c === "Paper") {
-            return "Computer won";
+            result.textContent = "Computer won";
+            return;
         }
-        return "Player won";
+        result.textContent = "Player won";
+        return;
     }
     if (p === "Paper") {
         if (c === "Rock") {
-            return "Player won";
+            result.textContent = "Player won";
+            return;
         }
         if (c === "Paper") {
-            return "Tie";
+            result.textContent = "Tie";
+            return;
         }
-        return "Computer won";
+        result.textContent = "Computer won";
+        return;
     }
     if (c === "Rock") {
-        return "Computer won";
+        result.textContent = "Computer won";
+        return;
     }
     if (c === "Paper") {
-        return "Player won";
+        result.textContent = "Player won";
+        return;
     }
-    return "Tie";
+    result.textContent = "Tie";
+    return;
 }
 
-
-for (let i = 0; i < 5; i++) {
-    const p = prompt("Rock or Paper or Scissors", "Invalid");
-    const c = getComputerChoice();
-    let result = playRound(p, c);
-    if (result === "Invalid") {
-        console.log("Invalid input");
-    } else {
-    console.log(result);
-    }
+let Rock = document.querySelector(".Rock");
+if (Rock === null || Rock == undefined) {
+    console.log("This language sucks ass");
 }
+Rock.addEventListener('click', playRound);
+
+let Paper = document.querySelector(".Paper");
+if (Paper === null || Paper == undefined) {
+    console.log("This language sucks ass");
+}
+Paper.addEventListener('click', playRound);
+
+let Scissors = document.querySelector(".Scissors");
+if (Scissors === null || Scissors == undefined) {
+    console.log("This language sucks ass");
+}
+Scissors.addEventListener('click', playRound);
+
